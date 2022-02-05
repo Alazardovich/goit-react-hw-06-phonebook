@@ -1,77 +1,19 @@
-/* eslint-disable no-undef */
 import "./App.css";
-import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import ContactForm from "../src/components/Form/Form.jsx";
 import Filter from "../src/components/Filter/Filter";
 import ContactList from "../src/components/ContactList/ContactList.jsx";
 
-// import ReactDOM from 'react-dom';
-
 const App = () => {
-  const [contacts, onContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem("contacts") ?? []);
-  });
-  // const [contacts, onContacts] = useState([]);
-  // const [filter, onFilter] = useState("");
-
-  useEffect(() => {
-    console.log("useEffectLocalS");
-    window.localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
-
-  const findContact = (name) => {
-    const normalizedName = name.toLowerCase();
-    return contacts.some((contact) => {
-      return contact.name.toLowerCase() === normalizedName;
-    });
-  };
-  const addNewContact = (name, number) => {
-    const checkName = findContact(name);
-    if (checkName) {
-      return toast.error(`${name}is already in contacts`);
-    }
-    const contact = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
-    onContacts((state) => [contact, ...state]);
-  };
-  const deleteContact = (contactId) => {
-    onContacts(contacts.filter(({ id }) => id !== contactId));
-  };
-
-  const changeFilter = (event) => {
-    onFilter(event.currentTarget.value);
-  };
-
-  const handleFilter = () => {
-    // const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
-  // const visibleContact = handleFilter();
   return (
     <div>
       <Toaster />
       <h1>Phonebook</h1>
-      <ContactForm
-      // addNewContact={addNewContact}
-      />
-
+      <ContactForm />
       <h2>Contacts</h2>
-      <Filter
-      //  filter={filter} onChange={changeFilter}
-      />
-      <ContactList
-      // onHandleFilter={visibleContact}
-      // onDeleteContact={deleteContact}
-      />
+      <Filter />
+      <ContactList />
     </div>
   );
 };

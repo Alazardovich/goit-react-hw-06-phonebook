@@ -1,24 +1,34 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { useDispatch } from "react-redux";
-// import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { getItems } from "../../redux/contacts/contactsSelected";
 // import PropTypes from "prop-types";
 import { FormList } from "./CSSForm";
 import { addContact } from "../../redux/contacts/contactsSlice";
 
-const ContactForm = ({ addNewContact }) => {
+const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getItems);
   const [name, onName] = useState("");
   const [number, onNumber] = useState("");
 
   const nanoIdName = nanoid();
   const nanoIdTel = nanoid();
 
+  const findContact = (name) => {
+    const normalizedName = name.toLowerCase();
+    return contacts.some((contact) => {
+      return contact.name.toLowerCase() === normalizedName;
+    });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
+    const checkName = findContact(name);
+    if (checkName) {
+      return toast.error(`${name}is already in contacts`);
+    }
     dispatch(addContact({ name, number, id: nanoid() }));
-    // console.log(addNewContact(name, number));
-    // addNewContact(name, number);
     onName("");
     onNumber("");
   };

@@ -3,13 +3,14 @@ import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { FilterContainer } from "./CSSFilter";
+import { getFilter } from "../../redux/contacts/contactsSelected";
 import { changeFilter } from "../../redux/contacts/contactsSlice";
 
 const Filter = () => {
   const filterId = nanoid();
-  const filter = useSelector((state) => state.contacts.filter);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
-  // const { filter, onChange } = this.props;
+
   return (
     <FilterContainer>
       <label htmlFor={filterId}>
