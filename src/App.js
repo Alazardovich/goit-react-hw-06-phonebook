@@ -1,6 +1,5 @@
 import "./App.css";
 import { Toaster } from "react-hot-toast";
-
 import ContactForm from "../src/components/Form/Form.jsx";
 import Filter from "../src/components/Filter/Filter";
 import ContactList from "../src/components/ContactList/ContactList.jsx";

@@ -1,5 +1,5 @@
 // import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import ContactItem from "../ContactItem/Item";
 import { getVisibleItems } from "../../redux/contacts/contactsSelected";
@@ -17,9 +17,9 @@ const ContactList = () => {
   );
 };
 
-// ContactList.propTypes = {
-//   onHandleFilter: PropTypes.arrayOf(
-//     PropTypes.shape({ id: PropTypes.string.isRequired })
-//   ),
-// };
+ContactList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({ id: PropTypes.string.isRequired })
+  ),
+};
 export default ContactList;
