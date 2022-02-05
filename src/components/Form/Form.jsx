@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
 // import toast, { Toaster } from "react-hot-toast";
 // import PropTypes from "prop-types";
 import { FormList } from "./CSSForm";
+import { addContact } from "../../redux/contacts/contactsSlice";
 
 const ContactForm = ({ addNewContact }) => {
+  const dispatch = useDispatch();
   const [name, onName] = useState("");
   const [number, onNumber] = useState("");
 
@@ -13,8 +16,9 @@ const ContactForm = ({ addNewContact }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(addContact({ name, number, id: nanoid() }));
     // console.log(addNewContact(name, number));
-    addNewContact(name, number);
+    // addNewContact(name, number);
     onName("");
     onNumber("");
   };

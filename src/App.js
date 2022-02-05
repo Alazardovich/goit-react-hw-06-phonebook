@@ -15,10 +15,10 @@ const App = () => {
     return JSON.parse(window.localStorage.getItem("contacts") ?? []);
   });
   // const [contacts, onContacts] = useState([]);
-  const [filter, onFilter] = useState("");
+  // const [filter, onFilter] = useState("");
 
   useEffect(() => {
-    console.log("useEffect");
+    console.log("useEffectLocalS");
     window.localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
@@ -55,18 +55,22 @@ const App = () => {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
-  const visibleContact = handleFilter();
+  // const visibleContact = handleFilter();
   return (
     <div>
       <Toaster />
       <h1>Phonebook</h1>
-      <ContactForm addNewContact={addNewContact} />
+      <ContactForm
+      // addNewContact={addNewContact}
+      />
 
       <h2>Contacts</h2>
-      <Filter filter={filter} onChange={changeFilter} />
+      <Filter
+      //  filter={filter} onChange={changeFilter}
+      />
       <ContactList
-        onHandleFilter={visibleContact}
-        onDeleteContact={deleteContact}
+      // onHandleFilter={visibleContact}
+      // onDeleteContact={deleteContact}
       />
     </div>
   );
